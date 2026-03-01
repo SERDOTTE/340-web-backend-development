@@ -14,3 +14,12 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+# ignore the lock file for pnpm, which is a package manager that is an alternative to npm and yarn. 
+# The lock file is used to ensure consistent installs across different environments, but it can be ignored in this case because it can be generated from the package.json file
+pnpm-lock.yaml
+
+
+# ignore the README file, which is a markdown file that contains information about the project. 
+# It is not necessary to include it in the repository, and it can be ignored to keep the repository clean and focused on the code.
+.README.md

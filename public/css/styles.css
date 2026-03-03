@@ -4,3 +4,117 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: #111;
+}
+
+#wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.siteName a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+#tools a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  background-color: #111;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+nav a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+}
+
+.home-content h1 {
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+.home-content p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+footer {
+  border-top: 1px solid #ddd;
+  padding: 1rem;
+}
+
+.copyright {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url("/images/site/small_check.jpg");
+    background-repeat: repeat;
+  }
+
+  #wrapper {
+    width: min(1100px, calc(100% - clamp(0px, 8vw, 80px)));
+    margin: 1rem auto;
+    background-color: #fff;
+    border: clamp(2px, 0.6vw, 6px) solid skyblue;
+    border-radius: clamp(8px, 1.8vw, 20px);
+  }
+
+  #top-header,
+  nav ul,
+  main,
+  footer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .siteName a {
+    font-size: 2rem;
+  }
+
+  #tools a {
+    font-size: 1rem;
+  }
+
+}

@@ -1,1 +1,9 @@
-<h1>Rodrigo Serdotte Freitas</h1>
+<section class="home-content">
+	<% if (title === "Home") { %>
+		<h1>Welcome to CSE Motors!</h1>
+		<p>Find your next vehicle by category.</p>
+	<% } else { %>
+		<h1>Category: <%= title %></h1>
+		<p>Browse our <%= title %> inventory.</p>
+	<% } %>
+</section>

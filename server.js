@@ -41,3 +41,19 @@ app.listen(port, () => {
 app.get("/", function(req, res) {
   res.render("index", { title: "Home" })
 })
+
+app.get("/custom", function(req, res) {
+  res.render("index", { title: "Custom" })
+})
+
+app.get("/sedan", function(req, res) {
+  res.render("index", { title: "Sedan" })
+})
+
+app.get("/suv", function(req, res) {
+  res.render("index", { title: "SUV" })
+})
+
+app.get("/truck", function(req, res) {
+  res.render("index", { title: "Truck" })
+})

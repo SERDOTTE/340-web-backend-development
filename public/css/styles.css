@@ -1,15 +1,41 @@
 /******* Change Box Model ***************/
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #f7fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --nav-bg: #111827;
+  --primary: #0e7490;
+  --primary-hover: #155e75;
+  --accent: #13398a;
+  --border: #cbd5e1;
+  --focus: #0284c7;
+}
+
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #fff;
-  color: #111;
+  font-family: "Source Sans 3", "Segoe UI", Tahoma, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h2,
+h3,
+.siteName a {
+  font-family: "Space Grotesk", "Segoe UI", Tahoma, sans-serif;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
 }
 
 #wrapper {
@@ -39,7 +65,7 @@ body {
 }
 
 nav {
-  background-color: #111;
+  background-color: var(--nav-bg);
 }
 
 nav ul {
@@ -53,10 +79,24 @@ nav ul {
 }
 
 nav a {
-  color: #fff;
+  color: #f8fafc;
   font-weight: bold;
   text-decoration: none;
   white-space: nowrap;
+}
+
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
 main {
@@ -72,12 +112,54 @@ main {
 .home-content p {
   margin: 0;
   font-size: 1rem;
+  color: var(--text-muted);
 }
 
 .home-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .home-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .home-hero {
+    grid-column: 1 / -1;
+  }
+
+  .home-upgrades {
+    grid-column: 1;
+    width: auto;
+    margin-inline: 0;
+  }
+
+  .home-reviews {
+    grid-column: 2;
+    width: auto;
+    margin-inline: 0;
+  }
+
+  .home-reviews li {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-reviews,
+  .home-upgrades {
+    width: min(100%, 560px);
+    margin-inline: auto;
+  }
 }
 
 .home-hero {
@@ -102,7 +184,7 @@ main {
 
 .hero-overlay {
   width: min(220px, 90%);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.85);
   padding: 0.8rem;
   border-radius: 6px;
 }
@@ -110,7 +192,7 @@ main {
 .hero-overlay h2 {
   margin: 0 0 0.4rem;
   font-size: 1.3rem;
-  color: #005f7a;
+  color: var(--primary-hover);
 }
 
 .hero-overlay ul {
@@ -120,14 +202,14 @@ main {
 
 .hero-overlay li {
   margin-bottom: 0.25rem;
-  color: #005f7a;
+  color: var(--primary-hover);
   font-weight: bold;
 }
 
 .own-today {
   display: inline-block;
-  background-color: skyblue;
-  color: #111;
+  background-color: var(--accent);
+  color: #ffffff;
   text-decoration: none;
   font-weight: 700;
   padding: 0.5rem 0.9rem;
@@ -135,10 +217,14 @@ main {
   box-shadow: 2px 2px 6px #9a9a9a;
 }
 
+.own-today:hover {
+  filter: brightness(0.94);
+}
+
 .home-reviews h2,
 .home-upgrades h2 {
   margin-top: 0;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.7rem;
 }
 
 .home-reviews ul {
@@ -147,7 +233,7 @@ main {
 }
 
 .home-reviews li {
-  margin-bottom: 0.6rem;
+  margin-bottom: 1.6rem;
 }
 
 .upgrades-grid {
@@ -163,8 +249,8 @@ main {
 
 .upgrade-image-box {
   aspect-ratio: 1 / 1;
-  background-color: #cdefff;
-  border: 2px solid #000;
+  background-color: #e6f4f8;
+  border: 2px solid var(--border);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -175,18 +261,18 @@ main {
 }
 
 .upgrade-image-box img {
-  max-width: 170%;
-  max-height: 170%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
 }
 
 .upgrade-item a {
-  color: #111;
+  color: var(--primary);
   font-weight: 600;
 }
 
 footer {
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--border);
   padding: 1rem;
 }
 
@@ -207,8 +293,8 @@ footer {
   #wrapper {
     width: min(1100px, calc(100% - clamp(0px, 8vw, 80px)));
     margin: 1rem auto;
-    background-color: #fff;
-    border: clamp(2px, 0.6vw, 6px) solid skyblue;
+    background-color: var(--surface);
+    border: clamp(2px, 0.6vw, 6px) solid var(--primary);
     border-radius: clamp(8px, 1.8vw, 20px);
   }
 
@@ -226,6 +312,31 @@ footer {
 
   #tools a {
     font-size: 1rem;
+  }
+
+  .home-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .home-hero {
+    min-height: clamp(320px, 42vw, 560px);
+    background-size: contain;
+    background-position: right center;
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .home-upgrades {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .home-reviews {
+    grid-column: 2;
+    grid-row: 2;
   }
 
 }

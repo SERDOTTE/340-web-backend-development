@@ -2,7 +2,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340rsf;
+    OWNER TO cse340rsf003;
 
 -- Table structure for table 'classification'
 CREATE TABLE public.classification (
@@ -55,7 +55,7 @@ VALUES ('Custom'),
 	('Truck'),
 	('Sedan');
 
-https://byui-cse.github.io/cse340-ww-content/downloads/inventory-data.txt
+--https://byui-cse.github.io/cse340-ww-content/downloads/inventory-data.txt
 
 -- Data for table `inventory`
 
@@ -238,3 +238,15 @@ VALUES   (
     'White',
     5
   );
+
+  --TASK 1.5.4 - Modify the "GM Hummer" record to read "a huge interior" rather than "small interiors" using a single query
+
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+--TASK 1.5.6 - Update all records in the inventory table to add "/vehicles" to the middle of the file path in the inv_image and inv_thumbnail columns using a single query.
+UPDATE inventory
+SET 
+    inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');

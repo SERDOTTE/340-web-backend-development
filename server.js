@@ -10,6 +10,9 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const inventoryRoute = require("./routes/inventoryRoute")
+const baseController = require("./controllers/baseController")
+const utilities = require("./utilities/")
 
 /* ***********************
  * Routes
@@ -38,22 +41,27 @@ app.listen(port, () => {
 })
 
 //Index route
-app.get("/", function(req, res) {
-  res.render("index", { title: "Home" })
+app.get("/", baseController.buildHome)
+
+app.get("/custom", async function(req, res) {
+  const nav = await utilities.getNav()
+  res.render("index", { title: "Custom", nav })
 })
 
-app.get("/custom", function(req, res) {
-  res.render("index", { title: "Custom" })
+app.get("/sedan", async function(req, res) {
+  const nav = await utilities.getNav()
+  res.render("index", { title: "Sedan", nav })
 })
 
-app.get("/sedan", function(req, res) {
-  res.render("index", { title: "Sedan" })
+app.get("/suv", async function(req, res) {
+  const nav = await utilities.getNav()
+  res.render("index", { title: "SUV", nav })
 })
 
-app.get("/suv", function(req, res) {
-  res.render("index", { title: "SUV" })
+app.get("/truck", async function(req, res) {
+  const nav = await utilities.getNav()
+  res.render("index", { title: "Truck", nav })
 })
 
-app.get("/truck", function(req, res) {
-  res.render("index", { title: "Truck" })
-})
+// Inventory routes
+app.use("/inv", inventoryRoute)

@@ -276,6 +276,14 @@ footer {
   padding: 1rem;
 }
 
+.footer-link-row {
+  margin: 0 0 0.4rem;
+}
+
+.footer-link-row a {
+  font-weight: 700;
+}
+
 /* Inventory classification grid */
 #inv-display {
   list-style: none;
@@ -333,6 +341,43 @@ footer {
   border: 1px solid #fdba74;
   border-radius: 8px;
   padding: 0.9rem;
+}
+
+/* Error view */
+.error-view {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fff5f5;
+}
+
+.error-view h1 {
+  margin: 0 0 0.35rem;
+}
+
+.error-view__label {
+  margin: 0 0 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #b91c1c;
+}
+
+.error-view__fun {
+  margin: 0 0 0.6rem;
+  font-weight: 700;
+}
+
+.error-view__message {
+  margin: 0 0 0.6rem;
+  color: var(--text);
+}
+
+.error-view__help {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
 }
 
 /* Inventory detail view */

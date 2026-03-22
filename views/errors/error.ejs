@@ -1,8 +1,8 @@
-<% if (title) { %>
-<h1><%= title %></h1>
-<% } else { %>
-<h1>Server Error</h1>
-<% } %>
-
-<h2>404 ERROR - Congrats. You broke it!</h2>
-<p><%= message %></p>
+<section class="error-view" role="alert" aria-live="polite">
+	<h1><%= title ? title : "Server Error" %></h1>
+	<p class="error-view__label">Application Error</p>
+	<p class="error-view__fun">Congrats. You broke it! :)</p>
+	<p class="error-view__message"><%= message ? message : "An unexpected error occurred." %></p>
+	<p class="error-view__help">Use the navigation menu or return to the homepage.</p>
+	<p><a href="/" title="Return to homepage">Return Home</a></p>
+</section>

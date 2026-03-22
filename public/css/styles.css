@@ -335,6 +335,60 @@ footer {
   padding: 0.9rem;
 }
 
+/* Inventory detail view */
+.vehicle-detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  background-color: var(--surface);
+}
+
+.vehicle-detail__image-wrap {
+  background-color: #f1f5f9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.vehicle-detail__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.vehicle-detail__content {
+  padding: 0.25rem;
+  min-width: 0;
+}
+
+.vehicle-detail__content p {
+  margin: 0 0 0.8rem;
+}
+
+.vehicle-detail__headline {
+  font-family: "Space Grotesk", "Segoe UI", Tahoma, sans-serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+}
+
+.vehicle-detail__price {
+  font-family: "Space Grotesk", "Segoe UI", Tahoma, sans-serif;
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  font-weight: 700;
+  color: var(--primary-hover);
+}
+
+@media (min-width: 900px) {
+  .vehicle-detail {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .vehicle-detail__content {
+    padding: 0.25rem 0.5rem;
+  }
+}
+
 @media (min-width: 700px) {
   #inv-display {
     grid-template-columns: repeat(2, minmax(0, 1fr));

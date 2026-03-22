@@ -58,6 +58,35 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the inventory detail view HTML
+* ************************************ */
+Util.buildInventoryDetail = async function (vehicle) {
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(vehicle.inv_price)
+  const formattedMiles = new Intl.NumberFormat("en-US").format(vehicle.inv_miles)
+
+  let detail = '<section class="vehicle-detail">'
+  detail += '<div class="vehicle-detail__image-wrap">'
+  detail += '<img class="vehicle-detail__image" src="' + vehicle.inv_image + '" alt="' + vehicle.inv_make + ' ' + vehicle.inv_model + '" />'
+  detail += '</div>'
+  detail += '<div class="vehicle-detail__content">'
+  detail += '<p class="vehicle-detail__headline">' + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + '</p>'
+  detail += '<p class="vehicle-detail__price">Price: ' + formattedPrice + '</p>'
+  detail += '<p><strong>Year:</strong> ' + vehicle.inv_year + '</p>'
+  detail += '<p><strong>Make:</strong> ' + vehicle.inv_make + '</p>'
+  detail += '<p><strong>Model:</strong> ' + vehicle.inv_model + '</p>'
+  detail += '<p><strong>Mileage:</strong> ' + formattedMiles + ' miles</p>'
+  detail += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
+  detail += '<p><strong>Description:</strong> ' + vehicle.inv_description + '</p>'
+  detail += '</div>'
+  detail += '</section>'
+
+  return detail
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

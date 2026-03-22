@@ -36,22 +36,22 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.get("/custom", utilities.handleErrors(async function(req, res) {
   const nav = await utilities.getNav()
   res.render("index", { title: "Custom", nav })
-})
+}))
 
-app.get("/sedan", async function(req, res) {
+app.get("/sedan", utilities.handleErrors(async function(req, res) {
   const nav = await utilities.getNav()
   res.render("index", { title: "Sedan", nav })
-})
+}))
 
-app.get("/suv", async function(req, res) {
+app.get("/suv", utilities.handleErrors(async function(req, res) {
   const nav = await utilities.getNav()
   res.render("index", { title: "SUV", nav })
-})
+}))
 
-app.get("/truck", async function(req, res) {
+app.get("/truck", utilities.handleErrors(async function(req, res) {
   const nav = await utilities.getNav()
   res.render("index", { title: "Truck", nav })
-})
+}))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)

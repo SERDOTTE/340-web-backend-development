@@ -9,10 +9,18 @@ require("dotenv").config()
  * *************** */
 
 let pool
+const connectionString = process.env.DATABASE_URL
+const isDevelopment = process.env.NODE_ENV === "development"
 
-if (process.env.NODE_ENV == "development") {
+if (!connectionString) {
+  throw new Error(
+    "DATABASE_URL is not set. Configure DATABASE_URL in your environment variables (Render dashboard -> Environment)."
+  )
+}
+
+if (isDevelopment) {
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     ssl: {
       rejectUnauthorized: false,
     },
@@ -34,7 +42,7 @@ if (process.env.NODE_ENV == "development") {
 } else {
   // Production environment
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     ssl: {
       rejectUnauthorized: false,
     },

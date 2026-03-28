@@ -341,9 +341,11 @@ footer {
   /* border: 1px solid #fdba74; */
   border-radius: 8px;
   padding: 0.9rem;
-  color: red;
+  color: rgb(123, 216, 100);
   font-weight: bold;
   font-style: italic;
+  text-align: center;
+  list-style: none;
 }
 
 
@@ -406,6 +408,8 @@ footer {
 .account-login #messages,
 .account-register #messages {
   margin-bottom: 0.75rem;
+  list-style: none;
+  padding: 0;
 }
 
 .account-login__form,

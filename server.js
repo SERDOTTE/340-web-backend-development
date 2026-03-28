@@ -13,6 +13,7 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 
@@ -52,6 +53,11 @@ app.use(function(req, res, next){
   next()
 })
 
+// Inventory routes - Unit 3, Activity 1, Step 2: Add the inventoryRoute to the server.js file. Place this above the accountRoute.
+app.use("/inv", inventoryRoute)
+// Account routes - Unit 4, Activity 1, Step 2: Add the accountRoute to the server.js file. Place this after the inventoryRoute.
+app.use("/account", accountRoute)
+
 //Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
@@ -76,10 +82,6 @@ app.get("/truck", utilities.handleErrors(async function(req, res) {
 }))
 
 
-
-// Inventory routes
-app.use("/inv", inventoryRoute)
-
 /* ***********************
  * Log statement to confirm server operation
  *************************/
@@ -87,7 +89,10 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 
-// File Not Found Route - must be last route in list
+/* ***********************
+ * File Not Found Route - must be last route in list
+ * Unit 3, Activity 1, Step 4: Add a catch-all route for handling 404 errors. Place this after all other routes.
+ *************************/
 app.use(utilities.handleErrors(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." })
 }))

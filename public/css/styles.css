@@ -384,6 +384,72 @@ footer {
   color: var(--text-muted);
 }
 
+/* Account login view */
+.account-login {
+  width: min(100%, 480px);
+  margin: 1.25rem auto;
+  padding: 1.25rem;
+  border: 1px solid #535961;
+  border-radius: 12px;
+  background: #1f4980;
+}
+
+.account-login h1 {
+  margin: 0 0 1rem;
+  text-align: center;
+  color: white;
+  
+}
+
+.account-login #messages {
+  margin-bottom: 0.75rem;
+}
+
+.account-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.account-login__form label {
+  font-weight: 600;
+  color: white;
+}
+
+.account-login__form input {
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #7aa7e7;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.account-login__form button {
+  margin-top: 0.75rem;
+  align-self: center;
+  padding: 0.55rem 1.5rem;
+  border: 0;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.account-login__form button:hover {
+  background: #6c82c0;
+}
+
+.account-login__signup {
+  margin: 1rem 0 0;
+  text-align: center;
+  color: white;
+}
+
+.account-login__signup a {
+  font-weight: 700;
+  color: white;
+}
+
 /* Inventory detail view */
 .vehicle-detail {
   display: grid;

@@ -8,7 +8,10 @@
     <input type="email" id="account_email" name="account_email">
 
     <label for="account_password">Password:</label>
-    <input type="password" id="account_password" name="account_password">
+    <div class="password-field-wrap">
+      <input type="password" id="account_password" name="account_password">
+      <button type="button" class="toggle-password" data-target="account_password" aria-label="Show password">Show</button>
+    </div>
 
     <button type="submit">Login</button>
   </form>
@@ -17,4 +20,4 @@
     No account? <a href="/account/register" title="Go to sign-up page">Sign-up</a>
   </p>
 </section>
-<script src="/js/scripts.js"></script>
+<script src="/js/script.js"></script>

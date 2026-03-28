@@ -1,0 +1,46 @@
+<section class="account-register">
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+  <p class="account-register__required-note">All fields are required.</p>
+
+  <form action="/account/register" method="post" class="account-register__form">
+    <label for="account_firstname">First Name <span aria-hidden="true">*</span></label>
+    <input type="text" id="account_firstname" name="account_firstname" required>
+
+    <label for="account_lastname">Last Name <span aria-hidden="true">*</span></label>
+    <input type="text" id="account_lastname" name="account_lastname" required>
+
+    <label for="account_email">Email <span aria-hidden="true">*</span></label>
+    <input type="email" id="account_email" name="account_email" required>
+
+    <label for="account_password">Password <span aria-hidden="true">*</span></label>
+    <div class="password-field-wrap">
+      <input
+        type="password"
+        id="account_password"
+        name="account_password"
+        minlength="12"
+        pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{12,}$"
+        title="Password must be at least 12 characters and include 1 capital letter, 1 number, and 1 special character."
+        aria-describedby="password-rules"
+        required>
+      <button type="button" class="toggle-password" data-target="account_password" aria-label="Show password">Show</button>
+    </div>
+
+    <ul id="password-rules" class="account-register__password-rules">
+      <li>12 characters in length, minimum</li>
+      <li>Contain at least 1 capital letter</li>
+      <li>Contain at least 1 number</li>
+      <li>Contain at least 1 special character</li>
+    </ul>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p class="account-login__signup">
+    Already have an account? <a href="/account/login" title="Go to login page">Login</a>
+  </p>
+</section>
+<script src="/js/script.js"></script>

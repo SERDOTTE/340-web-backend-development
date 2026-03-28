@@ -385,7 +385,8 @@ footer {
 }
 
 /* Account login view */
-.account-login {
+.account-login,
+.account-register {
   width: min(100%, 480px);
   margin: 1.25rem auto;
   padding: 1.25rem;
@@ -394,36 +395,42 @@ footer {
   background: #1f4980;
 }
 
-.account-login h1 {
+.account-login h1,
+.account-register h1 {
   margin: 0 0 1rem;
   text-align: center;
   color: white;
   
 }
 
-.account-login #messages {
+.account-login #messages,
+.account-register #messages {
   margin-bottom: 0.75rem;
 }
 
-.account-login__form {
+.account-login__form,
+.account-register__form {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
-.account-login__form label {
+.account-login__form label,
+.account-register__form label {
   font-weight: 600;
   color: white;
 }
 
-.account-login__form input {
+.account-login__form input,
+.account-register__form input {
   padding: 0.55rem 0.65rem;
   border: 1px solid #7aa7e7;
   border-radius: 6px;
   font: inherit;
 }
 
-.account-login__form button {
+.account-login__form button,
+.account-register__form button {
   margin-top: 0.75rem;
   align-self: center;
   padding: 0.55rem 1.5rem;
@@ -435,7 +442,8 @@ footer {
   cursor: pointer;
 }
 
-.account-login__form button:hover {
+.account-login__form button:hover,
+.account-register__form button:hover {
   background: #6c82c0;
 }
 
@@ -448,6 +456,51 @@ footer {
 .account-login__signup a {
   font-weight: 700;
   color: white;
+}
+
+.account-register__required-note {
+  margin: 0 0 0.75rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.account-register__password-rules {
+  margin: 0.35rem 0 0.25rem;
+  padding-left: 1.1rem;
+  color: #e2e8f0;
+}
+
+.account-register__password-rules li {
+  margin-bottom: 0.2rem;
+}
+
+.password-field-wrap {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.password-field-wrap input {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-login__form .toggle-password,
+.account-register__form .toggle-password {
+  margin-top: 0;
+  align-self: stretch;
+  width: 4.5rem;
+  flex-shrink: 0;
+  padding: 0.55rem 0;
+  border: 1px solid #283750;
+  border-radius: 6px;
+  background: #2563eb;
+  text-align: center;
+}
+
+.account-login__form .toggle-password:hover,
+.account-register__form .toggle-password:hover {
+  background: #6c82c0;
 }
 
 /* Inventory detail view */

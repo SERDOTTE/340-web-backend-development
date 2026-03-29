@@ -348,6 +348,24 @@ footer {
   list-style: none;
 }
 
+.validation-errors {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.25rem auto 0;
+  max-width: min(100%, 480px);
+  width: min(100%, 480px);
+}
+
+
+.validation-errors li {
+  /* padding: 0.6rem 0.9rem; */
+  margin-bottom: 0.1rem;
+  border-radius: 6px;
+  color: #b91c1c;
+  font-weight: 600;
+  text-align: left;
+}
+
 
 /* Error view */
 .error-view {

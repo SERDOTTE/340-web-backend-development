@@ -80,20 +80,4 @@ document.addEventListener("DOMContentLoaded", () => {
 	})
 
 	updatePasswordRules()
-
-	registerForm.addEventListener("submit", (event) => {
-		let hasError = false
-
-		requiredFields.forEach((field) => {
-			const message = getErrorMessage(field)
-			setFieldError(field, message)
-			if (message) hasError = true
-		})
-
-		if (hasError) {
-			event.preventDefault()
-			const firstInvalid = requiredFields.find((field) => field.classList.contains("input-error"))
-			if (firstInvalid) firstInvalid.focus()
-		}
-	})
 })

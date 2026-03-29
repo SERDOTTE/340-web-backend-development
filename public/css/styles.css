@@ -433,6 +433,29 @@ footer {
   font: inherit;
 }
 
+.field-error {
+  display: none;
+  margin: 0.05rem 0 0.1rem;
+  color: #ffe3e3;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field-error.is-visible {
+  display: block;
+}
+
+.account-register__form .input-error {
+  border-color: #ef4444;
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+
+.account-register__form .input-error:focus {
+  outline: 2px solid #fecaca;
+  outline-offset: 1px;
+}
+
 .account-login__form button,
 .account-register__form button {
   margin-top: 0.75rem;
@@ -469,13 +492,32 @@ footer {
 }
 
 .account-register__password-rules {
-  margin: 0.35rem 0 0.25rem;
+  margin: 0.45rem 0 0.25rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #0f172a;
+}
+
+.account-register__password-rules p {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+}
+
+.account-register__password-rules ul {
+  margin: 0;
   padding-left: 1.1rem;
-  color: #e2e8f0;
 }
 
 .account-register__password-rules li {
   margin-bottom: 0.2rem;
+  color: #334155;
+}
+
+.account-register__password-rules li.rule-met {
+  color: #15803d;
+  font-weight: 700;
 }
 
 .password-field-wrap {

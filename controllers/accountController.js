@@ -11,6 +11,7 @@ async function buildLogin(req, res, next) {
   res.render("account/login", {
     title: "Login",
     nav,
+    errors: null,
   })
 }
 
@@ -23,6 +24,9 @@ async function buildRegister(req, res, next) {
     title: "Register",
     nav,
     errors: null,
+    account_firstname: "",
+    account_lastname: "",
+    account_email: "",
   })
 }
 
@@ -40,6 +44,7 @@ async function accountLogin(req, res, next) {
     res.status(401).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
     return
   }
@@ -51,6 +56,7 @@ async function accountLogin(req, res, next) {
     res.status(401).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
     return
   }
@@ -84,12 +90,17 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   } else {
     req.flash("notice", "Sorry, the registration failed.")
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      errors: null,
+      account_firstname,
+      account_lastname,
+      account_email,
     })
   }
 }

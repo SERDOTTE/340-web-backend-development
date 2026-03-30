@@ -37,8 +37,9 @@ async function buildRegister(req, res, next) {
 async function accountLogin(req, res, next) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
+  const sanitizedEmail = account_email.trim().toLowerCase()
 
-  const accountResult = await accountModel.getAccountByEmail(account_email)
+  const accountResult = await accountModel.getAccountByEmail(sanitizedEmail)
   
   if (accountResult.rowCount === 0) {
     req.flash("notice", "Sorry, the login failed.")
@@ -51,8 +52,22 @@ async function accountLogin(req, res, next) {
   }
 
   const account = accountResult.rows[0]
-  
-  if (account_password !== account.account_password) {
+
+  const isHashedPassword = account.account_password.startsWith("$2")
+  let passwordMatch = false
+
+  if (isHashedPassword) {
+    passwordMatch = bcrypt.compareSync(account_password, account.account_password)
+  } else {
+    passwordMatch = account_password === account.account_password
+
+    if (passwordMatch) {
+      const migratedPassword = bcrypt.hashSync(account_password, 10)
+      await accountModel.updateAccountPassword(account.account_id, migratedPassword)
+    }
+  }
+
+  if (!passwordMatch) {
     req.flash("notice", "Sorry, the login failed.")
     res.status(401).render("account/login", {
       title: "Login",

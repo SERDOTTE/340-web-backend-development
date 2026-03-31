@@ -11,8 +11,8 @@ validate.classificationRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .matches(/^[A-Za-z0-9]+$/)
-      .withMessage("Classification name must contain only letters and numbers (no spaces or special characters)."),
+      .matches(/^[A-Za-z]+$/)
+      .withMessage("Classification name must contain letters only (no numbers, spaces, or special characters)."),
   ]
 }
 
@@ -53,12 +53,14 @@ validate.inventoryRules = () => {
       .trim()
       .escape()
       .notEmpty()
+      .isLength({ min: 3 })
       .withMessage("Please provide a make."),
 
     body("inv_model")
       .trim()
       .escape()
       .notEmpty()
+      .isLength({ min: 3 })
       .withMessage("Please provide a model."),
 
     body("inv_year")
@@ -85,8 +87,8 @@ validate.inventoryRules = () => {
     body("inv_price")
       .trim()
       .notEmpty()
-      .isFloat({ gt: 0 })
-      .withMessage("Please provide a valid price greater than 0."),
+      .matches(/^\d+(\.\d{2})$/)
+      .withMessage("Please provide price in US format (example: 120.00)."),
 
     body("inv_miles")
       .trim()

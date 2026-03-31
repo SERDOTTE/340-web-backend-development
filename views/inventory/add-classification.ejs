@@ -14,12 +14,13 @@
   <form class="inventory-form" action="/inv/add-classification" method="post">
     <label for="classification_name">Classification Name</label>
     <p class="inventory-form-page__note">Name must be alphabetic characters only. No spaces or special characters are allowed.</p>
+    <p class="inventory-client-error" id="classification_name_error" aria-live="polite"></p>
     <input
       type="text"
       id="classification_name"
       name="classification_name"
-      pattern="^[A-Za-z0-9]+$"
-      title="Use only letters and numbers. No spaces or special characters."
+      pattern="^[A-Za-z]+$"
+      title="Use letters only. No numbers, spaces, or special characters."
       required
       value="<%= locals.classification_name %>"
     >
@@ -27,3 +28,4 @@
     <button type="submit">Add Classification</button>
   </form>
 </section>
+<script src="/js/script.js"></script>

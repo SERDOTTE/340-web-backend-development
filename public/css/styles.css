@@ -575,7 +575,7 @@ footer {
   padding: 1.25rem;
   border: 1px solid #2c3f5a;
   border-radius: 12px;
-  background: linear-gradient(160deg, #1f4980, #1a365d);
+  background: linear-gradient(160deg, #1e4372, #1a365d);
   color: #f8fafc;
 }
 
@@ -611,7 +611,7 @@ footer {
   padding: 0.6rem 1.35rem;
   border-radius: 8px;
   border: 0;
-  background: #0ea5e9;
+  background: #0369a1;
   color: #ffffff;
   font-weight: 700;
   font-family: inherit;
@@ -621,7 +621,7 @@ footer {
 }
 
 .inventory-management__link:hover {
-  background: #0284c7;
+  background: #075985;
   color: #ffffff;
 }
 
@@ -652,6 +652,29 @@ label[for="classification_name"] {
   border: 1px solid #93c5fd;
 }
 
+.inventory-form .input-invalid {
+  background-color: #fee2e2;
+  border-color: #ef4444;
+  color: #7f1d1d;
+}
+
+.inventory-form .input-valid {
+  background-color: #dcfce7;
+  border-color: #22c55e;
+  color: #14532d;
+}
+
+.inventory-client-error {
+  display: none;
+  margin: 0.1rem 0 0.2rem;
+  color: #fecaca;
+  font-weight: 700;
+}
+
+.inventory-client-error.is-visible {
+  display: block;
+}
+
 .inventory-form #classificationList,
 .inventory-form #inv_make,
 .inventory-form #inv_model,
@@ -673,7 +696,7 @@ label[for="classification_name"] {
   border: 0;
   border-radius: 8px;
   padding: 0.6rem 1.35rem;
-  background: #0ea5e9;
+  background: #0369a1;
   color: #ffffff;
   font-weight: 700;
   font-family: inherit;
@@ -682,7 +705,7 @@ label[for="classification_name"] {
 }
 
 .inventory-form button:hover {
-  background: #0284c7;
+  background: #075985;
 }
 
 /* Inventory detail view */

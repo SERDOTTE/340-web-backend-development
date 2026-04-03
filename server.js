@@ -17,6 +17,7 @@ const accountRoute = require("./routes/accountRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Routes
@@ -25,6 +26,7 @@ app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 app.use(static)
+app.use(cookieParser())
 
 /* ***********************
  * Local Server Information
@@ -85,6 +87,8 @@ app.get("/truck", utilities.handleErrors(async function(req, res) {
   res.render("index", { title: "Truck", nav })
 }))
 
+
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Log statement to confirm server operation

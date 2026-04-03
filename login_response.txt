@@ -1,0 +1,64 @@
+HTTP/1.1 302 Found
+X-Powered-By: Express
+Set-Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxMiwiYWNjb3VudF9maXJzdG5hbWUiOiJUZXN0IiwiYWNjb3VudF9sYXN0bmFtZSI6IlVzZXIiLCJhY2NvdW50X2VtYWlsIjoidGVzdDIwMjYwNDAyMjI1MTQzQGV4YW1wbGUuY29tIiwiYWNjb3VudF90eXBlIjoiQ2xpZW50IiwiaWF0IjoxNzc1MTgxMjI0LCJleHAiOjE3Nzg3ODEyMjR9.OwhG-xQ6J2pqR8zwnH02eNMJ0DFdNRdaUCv15nsUhhs; Max-Age=3600; Path=/; Expires=Fri, 03 Apr 2026 02:53:44 GMT; HttpOnly
+Location: /account/
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 31
+Date: Fri, 03 Apr 2026 01:53:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 2046
+ETag: W/"7fe-/B/TZQ77q4f4A0G5l6mho+QaC+w"
+Date: Fri, 03 Apr 2026 01:53:44 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | CSE 340 App</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <header id="top-header">
+  <span class="siteName">
+    <a href="/" title="Return to home page">CSE Motors</a>
+  </span>
+  <div id="tools">
+    <a title="Click to log in" href="/account/login">My Account</a>
+    |
+    <a title="Click to register" href="/account/register">Sing Up</a>
+  </div>
+</header>
+        <nav>
+    <ul><li><a href="/" title="Home page">Home</a></li><li><a href="/inv/type/6" title="See our inventory of Classtest vehicles">Classtest</a></li><li><a href="/inv/type/1" title="See our inventory of Custom vehicles">Custom</a></li><li><a href="/inv/type/11" title="See our inventory of Electric vehicles">Electric</a></li><li><a href="/inv/type/5" title="See our inventory of Sedan vehicles">Sedan</a></li><li><a href="/inv/type/2" title="See our inventory of Sport vehicles">Sport</a></li><li><a href="/inv/type/3" title="See our inventory of SUV vehicles">SUV</a></li><li><a href="/inv/type/4" title="See our inventory of Truck vehicles">Truck</a></li></ul>
+</nav>
+
+        <main>
+            <section class="error-view" role="alert" aria-live="polite">
+	<h1>404</h1>
+	<p class="error-view__label">Application Error</p>
+	<p class="error-view__fun">Congrats. You broke it! :)</p>
+	<p class="error-view__message">Sorry, we appear to have lost that page.</p>
+	<p class="error-view__help">Use the navigation menu or return to the homepage.</p>
+	<p><a href="/" title="Return to homepage">Return Home</a></p>
+</section>
+        </main>
+
+        <footer>
+  <p class="copyright">&copy; 2026, CSE 340 App</p>
+  <p class="footer-link-row"><a href="/trigger-error" title="Trigger server error route">Error link</a></p>
+</footer>
+    </div>    
+</body>
+</html>

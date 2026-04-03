@@ -1,0 +1,12 @@
+HTTP/1.1 302 Found
+X-Powered-By: Express
+Set-Cookie: jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxMywiYWNjb3VudF9maXJzdG5hbWUiOiJDb3BpbG90IiwiYWNjb3VudF9sYXN0bmFtZSI6IlRlc3RlciIsImFjY291bnRfZW1haWwiOiJjb3BpbG90MjAyNjA0MDIyMzAxMTJAZXhhbXBsZS5jb20iLCJhY2NvdW50X3R5cGUiOiJDbGllbnQiLCJpYXQiOjE3NzUxODE2NzMsImV4cCI6MTc3ODc4MTY3M30.jFa9Y6bmDZj80z0UKTVmMmKR13LMoWWC9HGHpOkwDgQ; Max-Age=3600; Path=/; Expires=Fri, 03 Apr 2026 03:01:13 GMT; HttpOnly
+Location: /account/
+Vary: Accept
+Content-Type: text/plain; charset=utf-8
+Content-Length: 31
+Date: Fri, 03 Apr 2026 02:01:13 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+Found. Redirecting to /account/

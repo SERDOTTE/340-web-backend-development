@@ -18,4 +18,10 @@
   <% } %>
 
   <p>You're logged in.</p>
+
+  <% if (accountData && (accountData.account_type === "Employee" || accountData.account_type === "Admin")) { %>
+    <h2>Inventory Management</h2>
+    <p>Use the link below to manage inventory items.</p>
+    <p><a href="/inv/" title="Go to the inventory management view">Manage Inventory</a></p>
+  <% } %>
 </section>

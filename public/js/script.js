@@ -199,4 +199,45 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		})
 	}
+
+	const inventoryManagementList = document.getElementById("classificationList")
+	const inventoryDisplay = document.getElementById("inventoryDisplay")
+
+	if (inventoryManagementList && inventoryDisplay) {
+		inventoryManagementList.addEventListener("change", async () => {
+			const classificationId = inventoryManagementList.value
+			inventoryDisplay.innerHTML = ""
+
+			if (!classificationId) {
+				return
+			}
+
+			try {
+				const response = await fetch(`/inv/getInventory/${classificationId}`)
+
+				if (!response.ok) {
+					throw new Error(`Request failed with status ${response.status}`)
+				}
+
+				const data = await response.json()
+				let dataTable = "<thead><tr><th>Vehicle Name</th><th>Modify</th><th>Delete</th></tr></thead><tbody>"
+
+				if (data.length === 0) {
+					dataTable += '<tr><td colspan="3">No inventory items found for this classification.</td></tr>'
+				} else {
+					data.forEach((item) => {
+						dataTable += `<tr><td>${item.inv_make} ${item.inv_model}</td>`
+						dataTable += `<td><a href='/inv/edit/${item.inv_id}' title='Click to update'>Modify</a></td>`
+						dataTable += `<td><a href='/inv/delete/${item.inv_id}' title='Click to delete'>Delete</a></td></tr>`
+					})
+				}
+
+				dataTable += "</tbody>"
+				inventoryDisplay.innerHTML = dataTable
+			} catch (error) {
+				console.error("Error fetching inventory data:", error)
+				inventoryDisplay.innerHTML = '<tbody><tr><td colspan="3">Sorry, the inventory list could not be loaded.</td></tr></tbody>'
+			}
+		})
+	}
 })

@@ -9,4 +9,17 @@
     <a class="inventory-management__link" href="/inv/add-classification" title="Add a new vehicle classification">Add New Classification</a>
     <a class="inventory-management__link" href="/inv/add-inventory" title="Add a new vehicle">Add New Vehicle</a>
   </div>
+
+  <h2>Manage Inventory</h2>
+  <p>Select a classification from the list to see the items belonging to the classification.</p>
+
+  <div class="inventory-management__selector">
+    <%- typeof classificationList !== "undefined" ? classificationList : "" %>
+  </div>
+
+  <table id="inventoryDisplay"></table>
+  <noscript>JavaScript must be enabled to use this page.</noscript>
 </section>
+
+<script src="/js/script.js"></script>
+<script src="../../js/inventory.js"></script>

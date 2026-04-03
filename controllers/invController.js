@@ -8,9 +8,12 @@ const invCont = {}
  * ************************** */
 invCont.buildManagement = async function (req, res, next) {
   const nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+
   res.render("inventory/management", {
     title: "Vehicle Management",
     nav,
+    classificationList,
     errors: null,
   })
 }
@@ -39,9 +42,11 @@ invCont.addClassification = async function (req, res, next) {
   if (addResult && addResult.rowCount > 0) {
     req.flash("notice", `Classification ${classification_name} added successfully.`)
     const updatedNav = await utilities.getNav()
+    const classificationList = await utilities.buildClassificationList()
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav: updatedNav,
+      classificationList,
       errors: null,
     })
     return
@@ -114,9 +119,11 @@ invCont.addInventory = async function (req, res, next) {
   if (addResult && addResult.rowCount > 0) {
     req.flash("notice", `${inv_make} ${inv_model} was added successfully.`)
     const updatedNav = await utilities.getNav()
+    const classificationList = await utilities.buildClassificationList()
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav: updatedNav,
+      classificationList,
       errors: null,
     })
     return
@@ -177,6 +184,33 @@ invCont.buildByInventoryId = async function (req, res, next) {
     nav,
     detailHtml,
   })
+}
+
+/* ***************************
+ *  Return inventory by classification as JSON
+ * ************************** */
+invCont.getInventoryJSON = async function (req, res, next) {
+  const classification_id = req.params.classification_id
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+
+  if (invData && invData.length > 0) {
+    return res.json(invData)
+  }
+
+  return res.json([])
+}
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+  const classification_id = parseInt(req.params.classification_id)
+  const invData = await invModel.getInventoryByClassificationId(classification_id)
+  if (invData[0].inv_id) {
+    return res.json(invData)
+  } else {
+    next(new Error("No data returned"))
+  }
 }
 
 module.exports = invCont

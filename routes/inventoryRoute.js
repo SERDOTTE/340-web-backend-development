@@ -11,6 +11,9 @@ router.get("/", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invContro
 // Route to return inventory data by classification as JSON
 router.get("/getInventory/:classification_id", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invController.getInventoryJSON))
 
+// Route to build edit inventory view
+router.get("/edit/:inv_id", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invController.editInventoryView))
+
 // Route to build add-classification view
 router.get("/add-classification", utilities.checkEmployeeOrAdmin, utilities.handleErrors(invController.buildAddClassification))
 

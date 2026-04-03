@@ -11,5 +11,11 @@
 
   <%- messages() %>
 
-  <p>You're logged in</p>
+  <% if (accountData) { %>
+    <p>Welcome <%= accountData.account_firstname %> <%= accountData.account_lastname %>.</p>
+  <% } else { %>
+    <p>Welcome.</p>
+  <% } %>
+
+  <p>You're logged in.</p>
 </section>

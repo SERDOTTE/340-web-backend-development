@@ -58,6 +58,7 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(utilities.checkJWTToken)
 
 // Inventory routes - Unit 3, Activity 1, Step 2: Add the inventoryRoute to the server.js file. Place this above the accountRoute.
 app.use("/inv", inventoryRoute)
@@ -86,9 +87,6 @@ app.get("/truck", utilities.handleErrors(async function(req, res) {
   const nav = await utilities.getNav()
   res.render("index", { title: "Truck", nav })
 }))
-
-
-app.use(utilities.checkJWTToken)
 
 /* ***********************
  * Log statement to confirm server operation

@@ -154,10 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
 				case "inv_year":
 					return /^\d{4}$/.test(value) ? "" : "Use a valid 4-digit year."
 				case "inv_price": {
-					const usPricePattern = /^\d+(\.\d{2})$/
-					return usPricePattern.test(value)
+					const pricePattern = /^\d+(\.\d+)?$/
+					return pricePattern.test(value)
 						? ""
-						: "Use US format like 120.00 (dot as decimal separator)."
+						: "Enter a valid price (example: 120 or 120.50)."
 				}
 				case "inv_miles": {
 					const miles = Number(value)

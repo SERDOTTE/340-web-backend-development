@@ -743,10 +743,21 @@ label[for="classification_name"] {
   font-family: inherit;
   cursor: pointer;
   font-size: 1.1rem;
+  transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
-.inventory-form button:hover {
+.inventory-form button:not(:disabled):hover {
   background: #075985;
+}
+
+.inventory-form button:disabled,
+.inventory-form button.is-disabled {
+  background: #94a3b8;
+  color: #e2e8f0;
+  cursor: not-allowed;
+  opacity: 0.65;
+  box-shadow: none;
+  transform: none;
 }
 
 /* Inventory detail view */

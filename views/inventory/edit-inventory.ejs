@@ -40,7 +40,7 @@
 
     <label for="inv_price">Price</label>
     <p class="inventory-client-error" id="inv_price_error" aria-live="polite"></p>
-    <input type="text" id="inv_price" name="inv_price" inputmode="decimal" pattern="^\d+(\.\d{2})$" title="Use US format like 120.00 (dot as decimal separator)." placeholder="Example: 120.00" required value="<%= locals.inv_price %>">
+    <input type="number" id="inv_price" name="inv_price" inputmode="decimal" min="0" step="any" title="Enter a valid number such as 120 or 120.50." placeholder="Example: 120 or 120.50" required value="<%= locals.inv_price %>">
 
     <label for="inv_year">Year</label>
     <p class="inventory-client-error" id="inv_year_error" aria-live="polite"></p>
@@ -58,4 +58,4 @@
   </form>
 </section>
 <script src="/js/script.js"></script>
-<script src="/js/inv-update.js"></script>
+<script src="/js/inv-update.js?v=2"></script>

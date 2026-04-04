@@ -87,8 +87,11 @@ validate.inventoryRules = () => {
     body("inv_price")
       .trim()
       .notEmpty()
-      .matches(/^\d+(\.\d{2})$/)
-      .withMessage("Please provide price in US format (example: 120.00)."),
+      .withMessage("Please provide a price.")
+      .bail()
+      .customSanitizer((value) => typeof value === "string" ? value.replace(",", ".") : value)
+      .matches(/^\d+(\.\d+)?$/)
+      .withMessage("Please provide a valid price (example: 120 or 120.50)."),
 
     body("inv_miles")
       .trim()

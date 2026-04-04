@@ -44,7 +44,7 @@
 
     <label for="inv_year">Year</label>
     <p class="inventory-client-error" id="inv_year_error" aria-live="polite"></p>
-    <input type="text" id="inv_year" name="inv_year" pattern="^\d{4}$" title="Use a 4-digit year." placeholder="4-digit year" required value="<%= locals.inv_year %>">
+    <input type="number" id="inv_year" name="inv_year" min="1000" max="9999" step="1" title="Use a 4-digit year." placeholder="4-digit year" required value="<%= locals.inv_year %>">
 
     <label for="inv_miles">Miles</label>
     <p class="inventory-client-error" id="inv_miles_error" aria-live="polite"></p>

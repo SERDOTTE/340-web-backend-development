@@ -1,6 +1,6 @@
 <section class="inventory-form-page">
   <h1><%= title %></h1>
-  <p class="inventory-form-page__note">ALL FIELDS ARE REQUIRED. Edit the vehicle information below.</p>
+  <p class="inventory-form-page__note">ALL FIELDS ARE REQUIRED.</p>
   <%- messages() %>
 
   <% if (errors) { %>
@@ -11,7 +11,7 @@
     </ul>
   <% } %>
 
-  <form class="inventory-form" action="/inv/update" method="post">
+  <form class="inventory-form" id="updateForm" action="/inv/update" method="post">
     <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
 
     <label for="classificationList">Classification</label>
@@ -54,7 +54,8 @@
     <p class="inventory-client-error" id="inv_color_error" aria-live="polite"></p>
     <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
 
-    <button type="submit">Update Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
   </form>
 </section>
 <script src="/js/script.js"></script>
+<script src="/js/inv-update.js"></script>

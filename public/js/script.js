@@ -88,7 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	if (classificationForm && classificationInput && classificationError) {
 		const lettersOnlyPattern = /^[A-Za-z]+$/
 
-		const validateClassification = () => {
+		const setClassificationState = (message, showColor = true) => {
+			const hasValue = classificationInput.value.trim() !== ""
+			classificationInput.classList.toggle("input-invalid", showColor && Boolean(message))
+			classificationInput.classList.toggle("input-valid", showColor && !message && hasValue)
+			classificationError.textContent = message
+			classificationError.classList.toggle("is-visible", Boolean(message))
+			classificationInput.setAttribute("aria-invalid", message ? "true" : "false")
+		}
+
+		const validateClassification = (showColor = true) => {
 			const value = classificationInput.value.trim()
 			let message = ""
 
@@ -98,16 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				message = "Use letters only. No numbers, spaces, or special characters."
 			}
 
-			classificationInput.classList.toggle("input-invalid", Boolean(message))
-			classificationInput.classList.toggle("input-valid", !message)
-			classificationError.textContent = message
-			classificationError.classList.toggle("is-visible", Boolean(message))
-			classificationInput.setAttribute("aria-invalid", message ? "true" : "false")
-
+			setClassificationState(message, showColor)
 			return !message
 		}
 
-		classificationInput.addEventListener("input", validateClassification)
+		classificationInput.addEventListener("input", () => validateClassification(true))
+		classificationInput.addEventListener("blur", () => validateClassification(false))
 
 		classificationForm.addEventListener("submit", (event) => {
 			const isValid = validateClassification()
@@ -118,9 +123,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	}
 
-	const addInventoryForm = document.querySelector('.inventory-form[action="/inv/add-inventory"]')
+	const inventoryForm = document.querySelector('.inventory-form[action="/inv/add-inventory"], .inventory-form[action="/inv/update"]')
 
-	if (addInventoryForm) {
+	if (inventoryForm) {
 		const inventoryFields = [
 			document.getElementById("classificationList"),
 			document.getElementById("inv_make"),
@@ -163,11 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 
-		const setInventoryFieldState = (field, message) => {
+		const setInventoryFieldState = (field, message, showColor = true) => {
 			const errorElement = document.getElementById(`${field.id}_error`)
+			const rawValue = field.value
+			const hasValue = typeof rawValue === "string" ? rawValue.trim() !== "" : Boolean(rawValue)
 
-			field.classList.toggle("input-invalid", Boolean(message))
-			field.classList.toggle("input-valid", !message)
+			field.classList.toggle("input-invalid", showColor && Boolean(message))
+			field.classList.toggle("input-valid", showColor && !message && hasValue)
 			field.setAttribute("aria-invalid", message ? "true" : "false")
 
 			if (errorElement) {
@@ -179,16 +186,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		inventoryFields.forEach((field) => {
 			const eventName = field.tagName.toLowerCase() === "select" ? "change" : "input"
 			field.addEventListener(eventName, () => {
-				setInventoryFieldState(field, getInventoryErrorMessage(field))
+				setInventoryFieldState(field, getInventoryErrorMessage(field), true)
+			})
+			field.addEventListener("blur", () => {
+				setInventoryFieldState(field, getInventoryErrorMessage(field), false)
 			})
 		})
 
-		addInventoryForm.addEventListener("submit", (event) => {
+		inventoryForm.addEventListener("submit", (event) => {
 			let hasError = false
 
 			inventoryFields.forEach((field) => {
 				const message = getInventoryErrorMessage(field)
-				setInventoryFieldState(field, message)
+				setInventoryFieldState(field, message, true)
 				if (message) hasError = true
 			})
 

@@ -235,5 +235,53 @@ invCont.editInventoryView = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body
+
+  const inventoryId = Array.isArray(inv_id) ? parseInt(inv_id[0], 10) : parseInt(inv_id, 10)
+  const selectedClassificationId = Array.isArray(classification_id)
+    ? parseInt(classification_id[0], 10)
+    : parseInt(classification_id, 10)
+
+  const updateResult = await invModel.updateInventory(
+    inventoryId,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_year,
+    inv_miles,
+    inv_color,
+    selectedClassificationId
+  )
+
+  if (updateResult) {
+    const itemName = `${inv_make} ${inv_model}`.trim()
+    req.flash("notice", `${itemName} was successfully updated.`)
+    return res.redirect("/inv/")
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    return res.redirect("/inv/")
+  }
+}
+
 module.exports = invCont
 

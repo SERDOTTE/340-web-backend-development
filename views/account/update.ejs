@@ -11,15 +11,68 @@
 
   <%- messages() %>
 
-  <p>Use this page to update your account information.</p>
+  <p class="account-update__required-note">Update your account details below. All fields are required.</p>
 
-  <ul class="account-update__details">
-    <li><strong>Account ID:</strong> <%= account_id %></li>
-    <li><strong>First Name:</strong> <%= account_firstname %></li>
-    <li><strong>Last Name:</strong> <%= account_lastname %></li>
-    <li><strong>Email:</strong> <%= account_email %></li>
-    <li><strong>Account Type:</strong> <%= account_type %></li>
-  </ul>
+  <div class="account-update__group">
+    <h2>Edit Account</h2>
+    <form action="/account/update" method="post" class="account-update__form account-update__form--info" novalidate>
+      <label for="account_firstname">First Name <span aria-hidden="true">*</span></label>
+      <p class="field-error" id="account_firstname_error" aria-live="polite"></p>
+      <input type="text" id="account_firstname" name="account_firstname" value="<%= locals.account_firstname %>" autocomplete="given-name" aria-describedby="account_firstname_error" required>
+
+      <label for="account_lastname">Last Name <span aria-hidden="true">*</span></label>
+      <p class="field-error" id="account_lastname_error" aria-live="polite"></p>
+      <input type="text" id="account_lastname" name="account_lastname" value="<%= locals.account_lastname %>" autocomplete="family-name" aria-describedby="account_lastname_error" required>
+
+      <label for="account_email">Email Address <span aria-hidden="true">*</span></label>
+      <p class="field-error" id="account_email_error" aria-live="polite"></p>
+      <input type="email" id="account_email" name="account_email" value="<%= locals.account_email %>" autocomplete="email" aria-describedby="account_email_error" required>
+
+      <input type="hidden" name="account_id" value="<%= account_id %>">
+      <button type="submit">Update Account</button>
+    </form>
+  </div>
+
+  <div class="account-update__group">
+    <h2>Update Password</h2>
+    <p class="account-update__password-help">
+      Enter a new password only when you want to change your current one. Passwords must be at least 12 characters long and include uppercase, lowercase, a number, and a special character, with no spaces.
+    </p>
+
+    <form action="/account/update-password" method="post" class="account-update__form account-update__form--password" novalidate>
+      <label for="account_password">New Password <span aria-hidden="true">*</span></label>
+      <p class="field-error" id="account_password_error" aria-live="polite"></p>
+      <div class="password-field-wrap">
+        <input
+          type="password"
+          id="account_password"
+          name="account_password"
+          minlength="12"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+          title="Password must be at least 12 characters and include upper and lower case letters, a number, and a special character, with no spaces."
+          autocomplete="new-password"
+          aria-describedby="account_password_error password-rules"
+          required>
+        <button type="button" class="toggle-password" data-target="account_password" aria-label="Show password">Show</button>
+      </div>
+
+      <div id="password-rules" class="account-register__password-rules">
+        <p>Password requirements:</p>
+        <ul>
+          <li data-rule="length">At least 12 characters</li>
+          <li data-rule="lower">At least 1 lowercase letter</li>
+          <li data-rule="upper">At least 1 uppercase letter</li>
+          <li data-rule="number">At least 1 number</li>
+          <li data-rule="special">At least 1 special character</li>
+          <li data-rule="spaces">No spaces allowed</li>
+        </ul>
+      </div>
+
+      <input type="hidden" name="account_id" value="<%= account_id %>">
+      <button type="submit">Change Password</button>
+    </form>
+  </div>
 
   <p><a href="/account/" title="Return to account management">Back to Account Management</a></p>
 </section>
+<script src="/js/script.js"></script>

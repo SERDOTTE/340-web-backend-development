@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		})
 	})
 
-	const registerForm = document.querySelector(".account-register__form")
+	const accountForms = document.querySelectorAll(".account-register__form, .account-update__form")
 
-	if (registerForm) {
-		const requiredFields = Array.from(registerForm.querySelectorAll("input[required]"))
-		const passwordInput = document.getElementById("account_password")
-		const passwordRuleItems = Array.from(document.querySelectorAll("#password-rules li[data-rule]"))
+	accountForms.forEach((form) => {
+		const requiredFields = Array.from(form.querySelectorAll("input[required]"))
+		const passwordInput = form.querySelector('input[type="password"]')
+		const passwordRuleItems = Array.from(form.querySelectorAll('[data-rule]'))
 
 		const updatePasswordRules = () => {
 			if (!passwordInput || passwordRuleItems.length === 0) return
@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (!value) return "This field must be filled in."
 
-			if (field.id === "account_email" && !value.includes("@")) {
-				return "Enter a valid email address"
+			if (field.id === "account_lastname" && value.length < 2) {
+				return "Please provide a last name."
 			}
 
 			if (field.id === "account_email" && !field.checkValidity()) {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		const setFieldError = (field, message) => {
-			const errorElement = document.getElementById(`${field.id}_error`)
+			const errorElement = form.querySelector(`#${field.id}_error`)
 			if (!errorElement) return
 
 			errorElement.textContent = message
@@ -78,8 +78,24 @@ document.addEventListener("DOMContentLoaded", () => {
 			})
 		})
 
+		form.addEventListener("submit", (event) => {
+			let hasError = false
+
+			requiredFields.forEach((field) => {
+				const message = getErrorMessage(field)
+				setFieldError(field, message)
+				if (message) hasError = true
+			})
+
+			if (hasError) {
+				event.preventDefault()
+				const firstInvalid = requiredFields.find((field) => field.classList.contains("input-error"))
+				if (firstInvalid) firstInvalid.focus()
+			}
+		})
+
 		updatePasswordRules()
-	}
+	})
 
 	const classificationForm = document.querySelector('.inventory-form[action="/inv/add-classification"]')
 	const classificationInput = document.getElementById("classification_name")

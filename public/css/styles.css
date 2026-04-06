@@ -404,8 +404,9 @@ footer {
 
 /* Account login view */
 .account-login,
-.account-register {
-  width: min(100%, 480px);
+.account-register,
+.account-update {
+  width: min(100%, 560px);
   margin: 1.25rem auto;
   padding: 1.25rem;
   border: 1px solid #535961;
@@ -414,41 +415,49 @@ footer {
 }
 
 .account-login h1,
-.account-register h1 {
+.account-register h1,
+.account-update h1 {
   margin: 0 0 1rem;
   text-align: center;
   color: white;
-  
+}
+
+.account-update h2 {
+  margin: 0 0 0.75rem;
+  color: white;
 }
 
 .account-login #messages,
-.account-register #messages {
+.account-register #messages,
+.account-update #messages {
   margin-bottom: 0.75rem;
   list-style: none;
   padding: 0;
 }
 
 .account-login__form,
-.account-register__form {
+.account-register__form,
+.account-update__form {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
 .account-login__form label,
-.account-register__form label {
+.account-register__form label,
+.account-update__form label {
   font-weight: 600;
   color: white;
 }
 
 .account-login__form input,
-.account-register__form input {
+.account-register__form input,
+.account-update__form input {
   padding: 0.55rem 0.65rem;
   border: 1px solid #7aa7e7;
   border-radius: 6px;
   font: inherit;
 }
-
 .field-error {
   display: none;
   margin: 0.05rem 0 0.1rem;
@@ -461,19 +470,22 @@ footer {
   display: block;
 }
 
-.account-register__form .input-error {
+.account-register__form .input-error,
+.account-update__form .input-error {
   border-color: #ef4444;
   background-color: #fee2e2;
   color: #7f1d1d;
 }
 
-.account-register__form .input-error:focus {
+.account-register__form .input-error:focus,
+.account-update__form .input-error:focus {
   outline: 2px solid #fecaca;
   outline-offset: 1px;
 }
 
 .account-login__form button,
-.account-register__form button {
+.account-register__form button,
+.account-update__form button {
   margin-top: 0.75rem;
   align-self: center;
   padding: 0.55rem 1.5rem;
@@ -486,10 +498,10 @@ footer {
 }
 
 .account-login__form button:hover,
-.account-register__form button:hover {
+.account-register__form button:hover,
+.account-update__form button:hover {
   background: #6c82c0;
 }
-
 .account-login__signup {
   margin: 1rem 0 0;
   text-align: center;
@@ -501,12 +513,24 @@ footer {
   color: white;
 }
 
-.account-register__required-note {
+.account-register__required-note,
+.account-update__required-note,
+.account-update__password-help {
   margin: 0 0 0.75rem;
   color: #e2e8f0;
   font-weight: 600;
 }
 
+.account-update__group {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(191, 219, 254, 0.35);
+}
+
+.account-update__group:last-of-type {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
 .account-register__password-rules {
   margin: 0.45rem 0 0.25rem;
   padding: 0.7rem 0.8rem;
@@ -548,7 +572,8 @@ footer {
 }
 
 .account-login__form .toggle-password,
-.account-register__form .toggle-password {
+.account-register__form .toggle-password,
+.account-update__form .toggle-password {
   margin-top: 0;
   align-self: stretch;
   width: 4.5rem;
@@ -561,10 +586,10 @@ footer {
 }
 
 .account-login__form .toggle-password:hover,
-.account-register__form .toggle-password:hover {
+.account-register__form .toggle-password:hover,
+.account-update__form .toggle-password:hover {
   background: #6c82c0;
 }
-
 /* Inventory management + forms */
 .inventory-management,
 .inventory-form-page {

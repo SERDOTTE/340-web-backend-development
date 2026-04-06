@@ -40,6 +40,19 @@ async function checkExistingEmail(account_email){
 }
 
 /* *****************************
+*   Update account information
+* *************************** */
+async function updateAccount(account_firstname, account_lastname, account_email, account_id) {
+	try {
+		const sql = "UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING account_id, account_firstname, account_lastname, account_email, account_type"
+		const result = await pool.query(sql, [account_firstname, account_lastname, account_email, account_id])
+		return result.rows[0]
+	} catch (error) {
+		return null
+	}
+}
+
+/* *****************************
 *   Update account password
 * *************************** */
 async function updateAccountPassword(account_id, account_password) {
@@ -67,4 +80,4 @@ async function getAccountByEmail (account_email) {
 
 
 
-module.exports = { registerAccount, getAccountByEmail, checkExistingEmail, updateAccountPassword }
+module.exports = { registerAccount, getAccountByEmail, checkExistingEmail, updateAccount, updateAccountPassword }

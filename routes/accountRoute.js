@@ -11,6 +11,9 @@ router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.b
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
+// Route to log out the current client
+router.get("/logout", utilities.checkLogin, utilities.handleErrors(accountController.accountLogout))
+
 // Process the login request
 router.post(
 	"/login",

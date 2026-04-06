@@ -37,8 +37,17 @@ async function buildRegister(req, res, next) {
  *  Build account management view
  * *************************************** */
 async function buildManagement(req, res, next) {
-  let nav = await utilities.getNav()
-  const accountData = res.locals.accountData || null
+  const nav = await utilities.getNav()
+  let accountData = res.locals.accountData || null
+
+  if (accountData && accountData.account_id) {
+    const freshAccountData = await accountModel.getAccountById(accountData.account_id)
+    if (freshAccountData) {
+      accountData = freshAccountData
+      res.locals.accountData = freshAccountData
+      res.locals.loggedin = true
+    }
+  }
 
   res.render("account/management", {
     title: "Account Management",
@@ -53,12 +62,19 @@ async function buildManagement(req, res, next) {
  * *************************************** */
 async function buildUpdateAccount(req, res, next) {
   const nav = await utilities.getNav()
-  const accountData = res.locals.accountData || null
+  const sessionAccountData = res.locals.accountData || null
   const account_id = parseInt(req.params.account_id, 10)
 
-  if (!accountData || accountData.account_id !== account_id) {
+  if (!sessionAccountData || sessionAccountData.account_id !== account_id) {
     req.flash("notice", "Please log in to access your account information.")
     return res.redirect("/account/login")
+  }
+
+  const accountData = await accountModel.getAccountById(account_id)
+
+  if (!accountData) {
+    req.flash("notice", "Sorry, that account could not be found.")
+    return res.redirect("/account/")
   }
 
   res.render("account/update", {
@@ -93,16 +109,10 @@ async function updateAccount(req, res) {
     parsedAccountId
   )
 
-  if (updateResult) {
-    const updatedAccountData = {
-      account_id: updateResult.account_id,
-      account_firstname: updateResult.account_firstname,
-      account_lastname: updateResult.account_lastname,
-      account_email: updateResult.account_email,
-      account_type: updateResult.account_type,
-    }
+  const freshAccountData = await accountModel.getAccountById(parsedAccountId)
 
-    const accessToken = jwt.sign(updatedAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" })
+  if (updateResult && freshAccountData) {
+    const accessToken = jwt.sign(freshAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" })
 
     if (process.env.NODE_ENV === "development") {
       res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
@@ -110,20 +120,18 @@ async function updateAccount(req, res) {
       res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
     }
 
+    res.locals.accountData = freshAccountData
+    res.locals.loggedin = true
     req.flash("notice", "Account information updated successfully.")
-    return res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the account update failed.")
   }
 
-  req.flash("notice", "Sorry, the account update failed.")
-  return res.status(501).render("account/update", {
-    title: "Update Account Information",
+  return res.render("account/management", {
+    title: "Account Management",
     nav,
     errors: null,
-    account_id: parsedAccountId,
-    account_firstname,
-    account_lastname,
-    account_email,
-    account_type: res.locals.accountData.account_type,
+    accountData: freshAccountData || res.locals.accountData,
   })
 }
 
@@ -158,22 +166,21 @@ async function updatePassword(req, res) {
   }
 
   const updateResult = await accountModel.updateAccountPassword(parsedAccountId, hashedPassword)
+  const freshAccountData = await accountModel.getAccountById(parsedAccountId)
 
-  if (updateResult && updateResult.rowCount > 0) {
+  if (updateResult) {
+    res.locals.accountData = freshAccountData || res.locals.accountData
+    res.locals.loggedin = true
     req.flash("notice", "Password updated successfully.")
-    return res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the password update failed.")
   }
 
-  req.flash("notice", "Sorry, the password update failed.")
-  return res.status(501).render("account/update", {
-    title: "Update Account Information",
+  return res.render("account/management", {
+    title: "Account Management",
     nav,
     errors: null,
-    account_id: res.locals.accountData.account_id,
-    account_firstname: res.locals.accountData.account_firstname,
-    account_lastname: res.locals.accountData.account_lastname,
-    account_email: res.locals.accountData.account_email,
-    account_type: res.locals.accountData.account_type,
+    accountData: freshAccountData || res.locals.accountData,
   })
 }
 

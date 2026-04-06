@@ -1,0 +1,25 @@
+<% if (errors) { %>
+  <ul class="validation-errors">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<section class="account-update">
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+  <p>Use this page to update your account information.</p>
+
+  <ul class="account-update__details">
+    <li><strong>Account ID:</strong> <%= account_id %></li>
+    <li><strong>First Name:</strong> <%= account_firstname %></li>
+    <li><strong>Last Name:</strong> <%= account_lastname %></li>
+    <li><strong>Email:</strong> <%= account_email %></li>
+    <li><strong>Account Type:</strong> <%= account_type %></li>
+  </ul>
+
+  <p><a href="/account/" title="Return to account management">Back to Account Management</a></p>
+</section>

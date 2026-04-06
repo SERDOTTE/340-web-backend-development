@@ -49,6 +49,31 @@ async function buildManagement(req, res, next) {
 }
 
 /* ****************************************
+ *  Build account update view
+ * *************************************** */
+async function buildUpdateAccount(req, res, next) {
+  const nav = await utilities.getNav()
+  const accountData = res.locals.accountData || null
+  const account_id = parseInt(req.params.account_id, 10)
+
+  if (!accountData || accountData.account_id !== account_id) {
+    req.flash("notice", "Please log in to access your account information.")
+    return res.redirect("/account/login")
+  }
+
+  res.render("account/update", {
+    title: "Update Account Information",
+    nav,
+    errors: null,
+    account_id: accountData.account_id,
+    account_firstname: accountData.account_firstname,
+    account_lastname: accountData.account_lastname,
+    account_email: accountData.account_email,
+    account_type: accountData.account_type,
+  })
+}
+
+/* ****************************************
 *  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
@@ -150,4 +175,4 @@ async function accountLogout(req, res) {
   return res.redirect("/")
 }
 
-module.exports = { buildLogin, buildRegister, buildManagement, accountLogin, accountLogout, registerAccount }
+module.exports = { buildLogin, buildRegister, buildManagement, buildUpdateAccount, accountLogin, accountLogout, registerAccount }

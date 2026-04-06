@@ -157,7 +157,7 @@ Util.checkJWTToken = (req, res, next) => {
  * ************************************ */
 Util.checkEmployeeOrAdmin = (req, res, next) => {
   if (!res.locals.loggedin || !res.locals.accountData) {
-    req.flash("notice", "Please log in.")
+    req.flash("notice", "Please log in to continue.")
     return res.redirect("/account/login")
   }
 
@@ -167,8 +167,8 @@ Util.checkEmployeeOrAdmin = (req, res, next) => {
     return next()
   }
 
-  req.flash("notice", "You do not have permission to access inventory management.")
-  return res.redirect("/account/")
+  req.flash("notice", "Please log in with an Employee or Admin account to access inventory management.")
+  return res.redirect("/account/login")
 }
 
 module.exports = Util

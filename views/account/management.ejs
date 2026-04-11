@@ -13,22 +13,35 @@
 
   <% if (accountData) { %>
     <h2>Welcome <%= accountData.account_firstname %></h2>
-    <p>You're logged in.</p>
-    <p>
-      <a href="/account/update/<%= accountData.account_id %>" title="Update your account information">
+    <p class="account-management__status">You're logged in.</p>
+
+    <div class="account-management__actions">
+      <a
+        class="account-management__button-link"
+        href="/account/update/<%= accountData.account_id %>"
+        title="Update your account information"
+      >
         Edit Account Information
       </a>
-    </p>
-    <p>
-      <a href="/favorites/" title="View your saved favorite vehicles">
+
+      <a
+        class="account-management__button-link"
+        href="/favorites/"
+        title="View your saved favorite vehicles"
+      >
         My Favorites
       </a>
-    </p>
 
-    <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
-      <h3>Inventory Management</h3>
-      <p><a href="/inv/" title="Go to the inventory management view">Manage Inventory</a></p>
-    <% } %>
+      <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+        <a
+          class="account-management__button-link"
+          href="/inv/"
+          title="Go to the inventory management view"
+        >
+          Manage Inventory
+        </a>
+      <% } %>
+    </div>
   <% } else { %>
     <p>Welcome.</p>
   <% } %>

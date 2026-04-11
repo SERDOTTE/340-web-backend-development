@@ -1,0 +1,61 @@
+<section class="account-management account-favorites">
+  <h1><%= title %></h1>
+
+  <%- messages() %>
+
+  <p class="account-management__intro-text">Review and manage the vehicles you have saved for later.</p>
+
+  <% if (favorites && favorites.length > 0) { %>
+    <ul class="favorites-list">
+      <% favorites.forEach((vehicle) => { %>
+        <li class="favorites-list__item">
+          <a class="favorites-list__image-link" href="/inv/detail/<%= vehicle.inv_id %>" title="View details for <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+            <img
+              class="favorites-list__image"
+              src="<%= vehicle.inv_thumbnail %>"
+              alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>"
+            >
+          </a>
+
+          <div class="favorites-list__content">
+            <h2>
+              <a href="/inv/detail/<%= vehicle.inv_id %>" title="View <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                <%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %>
+              </a>
+            </h2>
+
+            <p>
+              <strong>Price:</strong>
+              <%= new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(vehicle.inv_price) %>
+            </p>
+            <p>
+              <strong>Mileage:</strong>
+              <%= new Intl.NumberFormat("en-US").format(vehicle.inv_miles) %> miles
+            </p>
+            <p>
+              <strong>Added:</strong>
+              <%= new Date(vehicle.created_at).toLocaleDateString("en-US") %>
+            </p>
+
+            <div class="favorite-actions favorite-actions--inline">
+              <a class="favorite-button favorite-button--secondary" href="/inv/detail/<%= vehicle.inv_id %>" title="View vehicle details">
+                View Details
+              </a>
+
+              <form action="/favorites/remove" method="post">
+                <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+                <input type="hidden" name="returnTo" value="/favorites/">
+                <button class="favorite-button favorite-button--danger" type="submit">Remove from Favorites</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p class="notice">You have not added any favorite vehicles yet.</p>
+    <p>
+      <a href="/" title="Return to the home page">Browse the inventory and save a few vehicles to this list.</a>
+    </p>
+  <% } %>
+</section>

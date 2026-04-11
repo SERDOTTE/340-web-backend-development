@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const favoriteModel = require("../models/favorite-model")
 const utilities = require("../utilities/")
 
 const invCont = {}
@@ -169,7 +170,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build inventory item detail view
  * ************************** */
 invCont.buildByInventoryId = async function (req, res, next) {
-  const inv_id = req.params.invId
+  const inv_id = parseInt(req.params.invId, 10)
   const data = await invModel.getInventoryById(inv_id)
 
   if (!data) {
@@ -177,12 +178,20 @@ invCont.buildByInventoryId = async function (req, res, next) {
   }
 
   const detailHtml = await utilities.buildInventoryDetail(data)
-  let nav = await utilities.getNav()
+  const nav = await utilities.getNav()
+  let isFavorite = false
+
+  if (res.locals.loggedin && res.locals.accountData && res.locals.accountData.account_id) {
+    const favorite = await favoriteModel.checkFavorite(inv_id, res.locals.accountData.account_id)
+    isFavorite = Boolean(favorite)
+  }
 
   res.render("./inventory/detail", {
     title: `${data.inv_make} ${data.inv_model}`,
     nav,
     detailHtml,
+    inv_id,
+    isFavorite,
   })
 }
 

@@ -1,7 +1,25 @@
 <% if (title) { %>
-<h1><%= title %></h1>
+  <h1><%= title %></h1>
 <% } else {
   res.redirect('/')
 } %>
 
+<%- messages() %>
+
 <%- detailHtml %>
+
+<section class="favorite-panel">
+  <% if (locals.loggedin && locals.accountData) { %>
+    <form action="<%= isFavorite ? '/favorites/remove' : '/favorites/add' %>" method="post" class="favorite-actions">
+      <input type="hidden" name="inv_id" value="<%= inv_id %>">
+      <input type="hidden" name="returnTo" value="/inv/detail/<%= inv_id %>">
+      <button class="favorite-button <%= isFavorite ? 'favorite-button--danger' : '' %>" type="submit">
+        <%= isFavorite ? 'Remove from Favorites' : 'Add to Favorites' %>
+      </button>
+    </form>
+  <% } else { %>
+    <p class="favorite-panel__login-note">
+      <a href="/account/login" title="Log in to save this vehicle">Log in to save this vehicle to your favorites.</a>
+    </p>
+  <% } %>
+</section>

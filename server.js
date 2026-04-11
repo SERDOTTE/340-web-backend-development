@@ -14,6 +14,7 @@ const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const favoriteRoute = require("./routes/favoriteRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
@@ -64,6 +65,8 @@ app.use(utilities.checkJWTToken)
 app.use("/inv", inventoryRoute)
 // Account routes - Unit 4, Activity 1, Step 2: Add the accountRoute to the server.js file. Place this after the inventoryRoute.
 app.use("/account", accountRoute)
+// Favorite routes - saved vehicles for logged-in users.
+app.use("/favorites", favoriteRoute)
 
 //Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
